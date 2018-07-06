@@ -12,8 +12,8 @@ This is my first opensource project, so please help me improve my open source et
 ### Installation:
 
 ```
-git clone git@github.com:Cerberus-LLC/m0xy.git
-cd m0xy && pipenv sync
+git clone git@github.com:Cerberus-LLC/m0xy-proxy.git
+cd m0xy-proxy && pipenv sync
 ```
 
 ### Usage:
