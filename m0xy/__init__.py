@@ -1,9 +1,9 @@
 '''
     :: title           : __init__.py
     :: project         : m0xy
-    :: notes           : Main m0xy client class
+    :: notes           : This is my first opensource project, so please give me any suggestions on how to improve.
 
-    Copyright (C) <year>  <name of author>
+    Copyright (C) 2018 Cerberus, LLC
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
