@@ -32,11 +32,21 @@ class M0xyClient():
         return
 
     def load_unchecked_proxies(self):
-        with open('m0xy/proxies.txt') as f:
-            content = f.readlines()
+        try:
+            with open('proxies.txt') as f:
+                content = f.readlines()
+        except FileNotFoundError:
+            raise ValueError('proxies.txt not found.')
+
         content = [x.strip() for x in content]
-        self.loaded_unchecked = content
-        return content
+
+        if content:
+            self.loaded_unchecked = content
+            return content
+        else:
+            raise ValueError('proxies.txt is empty.')
+
+        return
 
     def check_ip(self, ip):
         try:
@@ -65,7 +75,10 @@ class M0xyClient():
             return active_proxies
         return
 
-    def list_active_proxies
+    def list_active_proxies(self):
+        if self.active_proxies:
+            return self.active_proxies
+        return
 
     def calculate_time(self):
         if self.loaded_unchecked:
