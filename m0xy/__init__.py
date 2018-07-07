@@ -29,6 +29,7 @@ class M0xyClient():
         self.proxy_timeout = 10
         self.loaded_unchecked = False
         self.thread_pool = ThreadPool(self.thread_pools)
+
         return
 
     def load_unchecked_proxies(self):
@@ -72,6 +73,7 @@ class M0xyClient():
 
             self.loaded_unchecked = False
             self.active_proxies = active_proxies
+
             return active_proxies
         return
 
@@ -87,6 +89,9 @@ class M0xyClient():
             timeout = self.proxy_timeout
             total_pools = round(total_poxies / thread_pools)
             total_time = total_pools * timeout
+
+            if not total_time:
+                total_time = self.proxy_timeout
 
             return total_time
 
