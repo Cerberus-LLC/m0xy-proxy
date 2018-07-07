@@ -1,4 +1,4 @@
-'''
+"""
     :: title           : __init__.py
     :: project         : m0xy
     :: notes           : This is my first opensource project, so please give me any suggestions on how to improve.
@@ -17,7 +17,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import m0xy
 

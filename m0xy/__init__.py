@@ -1,4 +1,4 @@
-'''
+"""
     :: title           : __init__.py
     :: project         : m0xy
     :: notes           : This is my first opensource project, so please give me any suggestions on how to improve.
@@ -17,27 +17,30 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import multiprocessing.dummy
-import urllib.request as urllib2
-from typing import List
-from urllib.request import ProxyHandler
+import typing
+import urllib.error
+import urllib.request
 
 
-class M0xyClient():
+class M0xyClient:
 
     def __init__(self):
         self.thread_pools = 300
         self.proxy_timeout = 10
         self.loaded_unchecked = False
         self.thread_pool = multiprocessing.dummy.Pool(self.thread_pools)
+        self.active_proxies = False
+
+        return
 
     @property
     def load_unchecked_proxies(self):
         try:
             with open('proxies.txt') as f:
-                content: List[str] = f.readlines()
+                content: typing.List[str] = f.readlines()
         except FileNotFoundError:
             raise ValueError('proxies.txt not found.')
 
@@ -51,17 +54,15 @@ class M0xyClient():
 
     def check_ip(self, ip):
         try:
-            proxy_handler: ProxyHandler = urllib2.ProxyHandler({'http': ip})
-            opener = urllib2.build_opener(proxy_handler)
+            proxy_handler: urllib.request.ProxyHandler = urllib.request.ProxyHandler({'http': ip})
+            opener = urllib.request.build_opener(proxy_handler)
             opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-            urllib2.install_opener(opener)
-            req = urllib2.Request('http://www.icanhazip.com')
-            urllib2.urlopen(req, None, self.proxy_timeout)
+            urllib.request.install_opener(opener)
+            req = urllib.request.Request('http://www.icanhazip.com')
+            urllib.request.urlopen(req, None, self.proxy_timeout)
             return [ip, True]
-        except:
+        except urllib.error.URLError:
             return [ip, False]
-
-        return [ip, False]
 
     def check_loaded(self):
         working_proxies = list()
@@ -82,6 +83,7 @@ class M0xyClient():
             return self.active_proxies
         return
 
+    # noinspection PyTypeChecker
     def calculate_time(self):
         if self.loaded_unchecked:
             total_poxies = len(self.loaded_unchecked)

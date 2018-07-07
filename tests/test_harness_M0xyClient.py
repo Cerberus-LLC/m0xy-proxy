@@ -1,4 +1,4 @@
-'''
+"""
     :: title           : __init__.py
     :: project         : m0xy
     :: notes           : This is my first opensource project, so please give me any suggestions on how to improve.
@@ -17,9 +17,10 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import unittest
+
 import m0xy
 
 
@@ -33,5 +34,5 @@ class M0xyTest(unittest.TestCase):
         self.assertIsInstance(self.m0xy_client.load_unchecked_proxies, list)
 
     def test_calculate_time(self):
-        self.m0xy_client.load_unchecked_proxies
-        self.assertTrue(self.m0xy_client.calculate_time(),int)
+        self.m0xy_client.load_unchecked_proxies()
+        self.assertTrue(self.m0xy_client.calculate_time(), int)
