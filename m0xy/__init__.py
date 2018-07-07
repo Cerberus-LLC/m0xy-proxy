@@ -36,8 +36,7 @@ class M0xyClient:
 
         return
 
-    @property
-    def load_unchecked_proxies(self):
+    def load_unchecked_proxies(self, return_list = False):
         try:
             with open('proxies.txt') as f:
                 content: typing.List[str] = f.readlines()
@@ -48,7 +47,8 @@ class M0xyClient:
 
         if content:
             self.loaded_unchecked = content
-            return content
+            if return_list:
+                return content
         else:
             raise ValueError('proxies.txt is empty.')
 

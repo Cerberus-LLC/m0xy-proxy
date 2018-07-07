@@ -23,7 +23,7 @@ import m0xy
 
 m0xy_client = m0xy.M0xyClient()
 
-print("\nTotal Proxies to Check: %s" % (len(m0xy_client.load_unchecked_proxies),))
+print("\nTotal Proxies to Check: %s" % (len(m0xy_client.load_unchecked_proxies(True)),))
 
 print("\nApprox Time Remaining: %s seconds" % (m0xy_client.calculate_time(),))
 
