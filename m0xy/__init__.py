@@ -19,8 +19,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from multiprocessing.dummy import Pool as ThreadPool
+import multiprocessing.dummy
 import urllib.request as urllib2
+from typing import List
+from urllib.request import ProxyHandler
+
 
 class M0xyClient():
 
@@ -28,14 +31,13 @@ class M0xyClient():
         self.thread_pools = 300
         self.proxy_timeout = 10
         self.loaded_unchecked = False
-        self.thread_pool = ThreadPool(self.thread_pools)
+        self.thread_pool = multiprocessing.dummy.Pool(self.thread_pools)
 
-        return
-
+    @property
     def load_unchecked_proxies(self):
         try:
             with open('proxies.txt') as f:
-                content = f.readlines()
+                content: List[str] = f.readlines()
         except FileNotFoundError:
             raise ValueError('proxies.txt not found.')
 
@@ -47,16 +49,14 @@ class M0xyClient():
         else:
             raise ValueError('proxies.txt is empty.')
 
-        return
-
     def check_ip(self, ip):
         try:
-            proxy_handler = urllib2.ProxyHandler({'http': ip})
+            proxy_handler: ProxyHandler = urllib2.ProxyHandler({'http': ip})
             opener = urllib2.build_opener(proxy_handler)
             opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             urllib2.install_opener(opener)
             req = urllib2.Request('http://www.icanhazip.com')
-            urllib2.urlopen(req , None , self.proxy_timeout)
+            urllib2.urlopen(req, None, self.proxy_timeout)
             return [ip, True]
         except:
             return [ip, False]
@@ -72,9 +72,9 @@ class M0xyClient():
                     working_proxies.append(result[0])
 
             self.loaded_unchecked = False
-            self.active_proxies = active_proxies
+            self.active_proxies = working_proxies
 
-            return active_proxies
+            return working_proxies
         return
 
     def list_active_proxies(self):
