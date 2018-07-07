@@ -30,8 +30,8 @@ class M0xyTest(unittest.TestCase):
         super(M0xyTest, self).__init__(*args, **kwargs)
 
     def test_load_unchecked_proxies(self):
-        self.assertIsInstance(self.m0xy_client.load_unchecked_proxies(),list)
+        self.assertIsInstance(self.m0xy_client.load_unchecked_proxies, list)
 
     def test_calculate_time(self):
-        self.m0xy_client.load_unchecked_proxies()
+        self.m0xy_client.load_unchecked_proxies
         self.assertTrue(self.m0xy_client.calculate_time(),int)
