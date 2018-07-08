@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nosetests" tests="2" errors="0" failures="0" skip="0">
+<testcase classname="tests.test_harness_M0xyClient.M0xyTest" name="test_calculate_time" time="0.000"></testcase>
+<testcase classname="tests.test_harness_M0xyClient.M0xyTest" name="test_load_unchecked_proxies" time="0.000"></testcase>
+</testsuite>
